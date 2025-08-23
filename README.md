@@ -2,7 +2,23 @@
 
 Triggered by a recent event, I realized that I had never documented any of this.
 
-A lightweight real-world kafka streams example.  To be completed/extended.
+This project represents a lightweight real-world kafka streams example.  To be completed/extended.
+
+Implemented:
+
+- [x] read instructions from a kafka topic: each message contains an s3 object link to csv data
+- [x] process csv data:
+    - read csv data from s3
+    - cleanup (remove empty trailing column)
+    - transform to json record
+    - add 2 fields (timestamp, filename)
+- [x] write to KStream (append)
+- [x] write to KTable (upsert) (including stateTopic)
+- [ ] sink to db
+- [ ] sink to delta table on s3
+- [ ] call api
+- [ ] ...
+
 
 Find the [java docs here](https://jeroenflvr.github.io/streaming-csv-processor/api/)
 
