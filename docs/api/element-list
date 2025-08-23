@@ -1,7 +1,7 @@
-jeroenfl.csvprocessor
-jeroenfl.csvprocessor.config
-jeroenfl.csvprocessor.model
-jeroenfl.csvprocessor.processing
-jeroenfl.csvprocessor.storage
-jeroenfl.csvprocessor.streaming
-jeroenfl.csvprocessor.util
+jeroenflvr.csvprocessor
+jeroenflvr.csvprocessor.config
+jeroenflvr.csvprocessor.model
+jeroenflvr.csvprocessor.processing
+jeroenflvr.csvprocessor.storage
+jeroenflvr.csvprocessor.streaming
+jeroenflvr.csvprocessor.util
