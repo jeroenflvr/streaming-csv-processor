@@ -77,7 +77,7 @@ public class App {
  
         // Expand each COS path value into (key=functional key _-joined, value=json of row) records
         KStream<String, String> expanded = source
-            .peek((k, v) -> log.info("IN  -> {}", v))
+            // .peek((k, v) -> log.info("IN  -> {}", v))
             .flatMap((k, pathValue) -> {
                 List<KeyValue<String, String>> out = new ArrayList<>();
                 if (pathValue == null || pathValue.isBlank()) return out;
@@ -106,21 +106,21 @@ public class App {
                         while (!headers.isEmpty() && headers.get(headers.size() - 1).isBlank()) {
                             headers.remove(headers.size() - 1);
                         }
-                        log.info("Headers: {}", headers);
+                        // log.info("Headers: {}", headers);
  
-                        final int keyIndex = 10;
+                        final int keyIndex = 3;
                         if (headers.size() <= keyIndex) {
                             log.warn("Header has only {} columns (need at least 3). Skipping {}", headers.size(), pathValue);
                             return out;
                         }
-                        String[] ordersKeyHeaders = {"column keys"};
+                        String[] ordersKeyHeaders = {"o_orderkey","o_custkey"};
                         ArrayList<Integer> ordersKeyHeadersIdx = new ArrayList<>();
  
                         for (String h : ordersKeyHeaders){
                             ordersKeyHeadersIdx.add(headers.indexOf(h));
                         }
  
-                        log.info("--------> header indexes: {}", ordersKeyHeadersIdx);
+                        // log.info("--------> header indexes: {}", ordersKeyHeadersIdx);
  
                         // ---- Rows ----
                         String line;
@@ -138,7 +138,7 @@ public class App {
  
                             // String recordKey = parts[keyIndex];
                             String compositeRecordKey = String.join("_", compositeValues);
-                            log.info("-----------------> The REAL KEY: {}", compositeRecordKey);
+                            // log.info("-----------------> The REAL KEY: {}", compositeRecordKey);
                            
  
                             if (compositeRecordKey == null || compositeRecordKey.isBlank()) continue;
@@ -184,22 +184,25 @@ public class App {
                 // if (!emitSnapshotOnBootstrap && oldV == null) return null;
  
                 // only emit if extractionts is newer
-                Long newTs = tsLong(newV, mapper, "ExtractionTS");
-                Long oldTs = tsLong(oldV, mapper, "ExtractionTS");
-                log.info("--------------------> oldTs: {}, newTs: {}", oldTs, newTs);
+                // Long newTs = tsLong(newV, mapper, "ExtractionTS");
+                // Long oldTs = tsLong(oldV, mapper, "ExtractionTS");
+                // log.info("--------------------> oldTs: {}, newTs: {}", oldTs, newTs);
  
-                oldTs = (oldTs == null) ? 0 : oldTs;
+                // oldTs = (oldTs == null) ? 0 : oldTs;
  
-                return (newTs > oldTs) ? newV : null;
+                // return (newTs > oldTs) ? newV : null;
+                return newV;
             }
         ).filter((k, v) -> v != null);
  
-        updatesOnly.peek((k, v) -> log.info("UPDATE -> key='{}'", k))
+        updatesOnly
+                .peek((k, v) -> log.info("UPDATE -> key='{}'", k))
                 .to(updateTopic, Produced.with(Serdes.String(), Serdes.String()));
  
         updatesOnly.to(stateTopic, Produced.with(Serdes.String(), Serdes.String()));
  
-        expanded.peek((k, v) -> log.info("OUT -> key='{}' value='{}'", k, v))
+        expanded
+                .peek((k, v) -> log.info("OUT -> key='{}' value='{}'", k, v))
                 .to(outputTopic, Produced.with(Serdes.String(), Serdes.String()));
         // expanded.peek((k, v) -> log.info("OUT -> key='{}' value='{}'", k, v))
         //         .to(updateTopic, Produced.with(Serdes.String(), Serdes.String()));
@@ -234,11 +237,11 @@ public class App {
     }
  
     static S3Client buildS3ClientFromEnv() {
-        String endpoint = mustGetEnv("COS_ENDPOINT"); // e.g., https://s3.eu-de.cloud-object-storage.appdomain.cloud
+        String endpoint = mustGetEnv("COS_ENDPOINT");
         String region   = envOrDefault("COS_REGION", "eu-fr2");
         String access = mustGetEnv("COS_ACCESS_KEY_ID");
         String secret = mustGetEnv("COS_SECRET_ACCESS_KEY");
-        boolean pathStyle = Boolean.parseBoolean(envOrDefault("COS_PATH_STYLE", "false")); // true for some custom endpoints
+        boolean pathStyle = Boolean.parseBoolean(envOrDefault("COS_PATH_STYLE", "true")); // true for some custom endpoints
  
         return S3Client.builder()
                 .credentialsProvider(StaticCredentialsProvider.create(AwsBasicCredentials.create(access, secret)))
@@ -262,118 +265,118 @@ public class App {
     }
  
     /** Transformer that turns each path message into many (key,value) row messages. */
-    static class CosCsvFlatTransformerSupplier implements TransformerSupplier<String, String, Iterable<KeyValue<String, String>>> {
-        private final S3Client s3;
+    // static class CosCsvFlatTransformerSupplier implements TransformerSupplier<String, String, Iterable<KeyValue<String, String>>> {
+    //     private final S3Client s3;
  
-        CosCsvFlatTransformerSupplier(S3Client s3) {
-            this.s3 = s3;
-        }
+    //     CosCsvFlatTransformerSupplier(S3Client s3) {
+    //         this.s3 = s3;
+    //     }
  
-        @Override
-        public Transformer<String, String, Iterable<KeyValue<String, String>>> get() {
-            return new CosCsvFlatTransformer(s3);
-        }
-    }
+    //     @Override
+    //     public Transformer<String, String, Iterable<KeyValue<String, String>>> get() {
+    //         return new CosCsvFlatTransformer(s3);
+    //     }
+    // }
  
-    static class CosCsvFlatTransformer implements Transformer<String, String, Iterable<KeyValue<String, String>>> {
-        private final S3Client s3;
-        private final ObjectMapper mapper;
+    // static class CosCsvFlatTransformer implements Transformer<String, String, Iterable<KeyValue<String, String>>> {
+    //     private final S3Client s3;
+    //     private final ObjectMapper mapper;
  
-        CosCsvFlatTransformer(S3Client s3) {
-            this.s3 = s3;
-            this.mapper = new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-        }
+    //     CosCsvFlatTransformer(S3Client s3) {
+    //         this.s3 = s3;
+    //         this.mapper = new ObjectMapper().configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+    //     }
  
-        @Override
-        public void init(ProcessorContext context) {}
+    //     @Override
+    //     public void init(ProcessorContext context) {}
  
-       @Override
-        public Iterable<KeyValue<String, String>> transform(String ignoredKey, String pathValue) {
-            if (pathValue == null || pathValue.isBlank()) {
-                return List.of();
-            }
-            try {
-                S3Location loc = S3Location.parse(pathValue.trim());
+    //    @Override
+    //     public Iterable<KeyValue<String, String>> transform(String ignoredKey, String pathValue) {
+    //         if (pathValue == null || pathValue.isBlank()) {
+    //             return List.of();
+    //         }
+    //         try {
+    //             S3Location loc = S3Location.parse(pathValue.trim());
  
-                GetObjectRequest req = GetObjectRequest.builder()
-                        .bucket(loc.bucket)
-                        .key(loc.key)
-                        .build();
+    //             GetObjectRequest req = GetObjectRequest.builder()
+    //                     .bucket(loc.bucket)
+    //                     .key(loc.key)
+    //                     .build();
  
-                try (ResponseInputStream<GetObjectResponse> is = s3.getObject(req);
-                     BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
+    //             try (ResponseInputStream<GetObjectResponse> is = s3.getObject(req);
+    //                  BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
  
-                    CSVFormat format = CSVFormat.DEFAULT.builder()
-                            .setDelimiter(';')
-                            .setSkipHeaderRecord(true)
-                            .setTrim(true)
-                            .setIgnoreEmptyLines(true)
-                            .build();
+    //                 CSVFormat format = CSVFormat.DEFAULT.builder()
+    //                         .setDelimiter(';')
+    //                         .setSkipHeaderRecord(true)
+    //                         .setTrim(true)
+    //                         .setIgnoreEmptyLines(true)
+    //                         .build();
  
-                    CSVParser parser = new CSVParser(reader, format);
+    //                 CSVParser parser = new CSVParser(reader, format);
  
-                    final List<String> headers = parser.getHeaderNames();
-                    if (headers == null || headers.isEmpty()) {
-                        return List.of();
-                    }
-                   // Drop a trailing empty column if header name is blank (typical for lines ending with ';')
-                    final boolean dropLast = !headers.isEmpty() && headers.get(headers.size() - 1).isBlank();
-                    final int keyIndex = 10; // 0-based -> third column OrdId for orders
+    //                 final List<String> headers = parser.getHeaderNames();
+    //                 if (headers == null || headers.isEmpty()) {
+    //                     return List.of();
+    //                 }
+    //                // Drop a trailing empty column if header name is blank (typical for lines ending with ';')
+    //                 final boolean dropLast = !headers.isEmpty() && headers.get(headers.size() - 1).isBlank();
+    //                 final int keyIndex = 10; // 0-based -> third column OrdId for orders
  
-                    List<KeyValue<String, String>> out = new ArrayList<>(1024);
+    //                 List<KeyValue<String, String>> out = new ArrayList<>(1024);
  
-                    for (CSVRecord rec : parser) {
-                        // Defensive: skip short/empty lines
-                        if (rec.size() == 0 || rec.size() <= keyIndex) continue;
+    //                 for (CSVRecord rec : parser) {
+    //                     // Defensive: skip short/empty lines
+    //                     if (rec.size() == 0 || rec.size() <= keyIndex) continue;
  
-                        String recordKey = rec.get(keyIndex);
-                        log.info("record: {}", recordKey);
-                        if (recordKey == null || recordKey.isBlank()) {
-                            // skip rows with missing key
-                            continue;
-                        }
+    //                     String recordKey = rec.get(keyIndex);
+    //                     log.info("record: {}", recordKey);
+    //                     if (recordKey == null || recordKey.isBlank()) {
+    //                         // skip rows with missing key
+    //                         continue;
+    //                     }
  
-                        // Build JSON map excluding the key column and trailing empty column (if any)
-                        Map<String, String> valueMap = new LinkedHashMap<>();
-                        int lastIdx = headers.size() - 1;
+    //                     // Build JSON map excluding the key column and trailing empty column (if any)
+    //                     Map<String, String> valueMap = new LinkedHashMap<>();
+    //                     int lastIdx = headers.size() - 1;
  
-                        for (int i = 0; i < headers.size(); i++) {
-                            if (i == keyIndex) continue;                 // exclude key column
-                            if (dropLast && i == lastIdx) continue;       // drop artificial empty column
+    //                     for (int i = 0; i < headers.size(); i++) {
+    //                         if (i == keyIndex) continue;                 // exclude key column
+    //                         if (dropLast && i == lastIdx) continue;       // drop artificial empty column
  
-                            String h = headers.get(i);
-                            if (h == null || h.isBlank()) continue;       // ignore blank header names
-                            String v = safeGet(rec, i);
-                            valueMap.put(h, v);
-                        }
+    //                         String h = headers.get(i);
+    //                         if (h == null || h.isBlank()) continue;       // ignore blank header names
+    //                         String v = safeGet(rec, i);
+    //                         valueMap.put(h, v);
+    //                     }
  
-                        String json = mapper.writeValueAsString(valueMap);
-                        out.add(KeyValue.pair(recordKey, json));
-                    }
-                    parser.close();
-                    return out;
-                }
-            } catch (NoSuchKeyException e) {
-                log.error("COS key not found for path '{}': {}", pathValue, e.getMessage());
-                return List.of();
-            } catch (Exception e) {
-                log.error("Failed to process path '{}': {}", pathValue, e.toString());
-                return List.of();
-            }
-        }
+    //                     String json = mapper.writeValueAsString(valueMap);
+    //                     out.add(KeyValue.pair(recordKey, json));
+    //                 }
+    //                 parser.close();
+    //                 return out;
+    //             }
+    //         } catch (NoSuchKeyException e) {
+    //             log.error("COS key not found for path '{}': {}", pathValue, e.getMessage());
+    //             return List.of();
+    //         } catch (Exception e) {
+    //             log.error("Failed to process path '{}': {}", pathValue, e.toString());
+    //             return List.of();
+    //         }
+    //     }
  
-        private static String safeGet(CSVRecord rec, int idx) {
-            try {
-                String v = rec.get(idx);
-                return v == null ? "" : v;
-            } catch (Exception e) {
-                return "";
-            }
-        }
+    //     private static String safeGet(CSVRecord rec, int idx) {
+    //         try {
+    //             String v = rec.get(idx);
+    //             return v == null ? "" : v;
+    //         } catch (Exception e) {
+    //             return "";
+    //         }
+    //     }
  
-        @Override
-        public void close() {}
-    }
+    //     @Override
+    //     public void close() {}
+    // }
  
     /** Simple parser for s3:// or cos:// URIs, or "bucket/key..." fallback. */
     static class S3Location {

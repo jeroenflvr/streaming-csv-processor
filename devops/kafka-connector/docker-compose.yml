@@ -1,0 +1,8 @@
+services:
+  connect:
+    image: confluentinc/cp-kafka-connect:latest
+    environment:
+      CONNECT_PLUGIN_PATH: /usr/share/java,/etc/kafka-connect/jars
+    volumes:
+      - ./jars:/etc/kafka-connect/jars
+      - ./data-duckdb:/data

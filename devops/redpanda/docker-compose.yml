@@ -11,7 +11,7 @@ services:
       - "8082:8082" # Pandaproxy
     volumes:
       - ./certs:/etc/redpanda/certs:ro
-      - redpanda-data:/var/lib/redpanda/data
+      - ./redpanda-data:/var/lib/redpanda/data
     command:
       - redpanda
       - start

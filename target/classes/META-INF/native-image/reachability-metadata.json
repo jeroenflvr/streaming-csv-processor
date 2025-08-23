@@ -1,0 +1,11 @@
+{
+  "resources": [
+    {
+      "glob": "org/slf4j/impl/StaticLoggerBinder.class"
+    },
+    {
+      "glob": "simplelogger.properties"
+    }
+  ],
+  "bundles": []
+}

@@ -2,7 +2,7 @@
 
 A real-world kafka streams example.
 
-- pipeline 1: read data from csv on s3, transform to json and sink to kafka topic
+- pipeline 1: read data from csv/parquet on s3, transform to json and sink to kafka topic
 - pipeline 2 (kafka streams): read kafka data, enrich, sink to KStream (append) and KTable (upsert) topics
 - pipeline 3: sink to postgresql, deltalake, web ticker (SSE), ...  Not sure yet if we'll be doing spark, flink, dbt, ...
 
@@ -35,6 +35,7 @@ Get java 17, python3, docker or docker desktop, rpk (redpanda cli), akhq, ...
 
 
 ## Setup
+
 
 ### akhq
 ...
@@ -80,4 +81,40 @@ s3 =
 [minio]
 aws_access_key_id = minioadmin
 aws_secret_access_key = minioadmin123
+```
+
+
+
+## The Flow
+
+For test data, we'll use the TPC-H stuff from [here](https://github.com/jeroenflvr/dbgen) and store to our minio bucket.
+
+```bash
+```
+
+Get the duckdb JDBC jar
+```
+mvn dependency:get \
+  -DgroupId=org.duckdb \
+  -DartifactId=duckdb_jdbc \
+  -Dversion=1.3.2.0
+```
+
+then copy it from cp ~/.m2/repository/org/duckdb/duckdb_jdbc/1.3.2.0/duckdb_jdbc-1.3.2.0.jar into your workdir for the kafka connector
+
+dropping the duckdb jdbc connector here, too much hassle setting up kafka connect
+
+
+## Compile and Run
+
+std java
+
+compile
+```bash
+mvn -e -DskipTests package
+```
+
+run
+```bash
+java -jar target/csvprocessor-1.0.0-shaded.jar
 ```

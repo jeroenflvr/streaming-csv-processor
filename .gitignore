@@ -19,3 +19,4 @@ build/
 pip-wheel-metadata/
 *.jar
 minio-data/
+data-duckdb/
