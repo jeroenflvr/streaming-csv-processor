@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  redpanda:
+    image: docker.redpanda.com/redpandadata/redpanda:latest
+    container_name: redpanda
+    ports:
+      - "9093:9093" # Kafka TLS
+      - "9644:9644" # Admin API
+      - "8081:8081" # Schema Registry
+      - "8082:8082" # Pandaproxy
+    volumes:
+      - ./certs:/etc/redpanda/certs:ro
+      - redpanda-data:/var/lib/redpanda/data
+    command:
+      - redpanda
+      - start
+      - --overprovisioned
+      - --smp=1
+      - --memory=1G
+      - --reserve-memory=0M
+      - --check=false
+      - --node-id=0
+      - --kafka-addr=SSL://0.0.0.0:9093
+      - --advertise-kafka-addr=SSL://localhost:9093
+      - --set
+      - redpanda.kafka_api_tls={"name":"SSL","enabled":true,"cert_file":"/etc/redpanda/certs/server.crt","key_file":"/etc/redpanda/certs/server.key","truststore_file":"/etc/redpanda/certs/ca.crt"}
+
+volumes:
+  redpanda-data:
