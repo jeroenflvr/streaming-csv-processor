@@ -8,10 +8,57 @@ import org.apache.kafka.streams.StreamsConfig;
 import java.util.Properties;
 
 /**
- * Factory for creating Kafka Streams configuration.
+ * Factory class for creating Kafka Streams configuration properties.
+ * 
+ * <p>This factory encapsulates the creation of Kafka Streams configuration,
+ * including SSL setup, serialization configuration, and processing guarantees.
+ * It provides a centralized location for all Kafka-related configuration logic.
+ * 
+ * <p>The factory creates configurations suitable for production use with:
+ * <ul>
+ *   <li>SSL encryption for secure communication</li>
+ *   <li>Exactly-once processing semantics</li>
+ *   <li>String-based key/value serialization</li>
+ *   <li>Configurable bootstrap servers and application ID</li>
+ * </ul>
+ * 
+ * @author CSV Processor Team
+ * @version 1.0.0
+ * @since 1.0.0
+ * @see ApplicationConfig
+ * @see EnvironmentUtils
  */
 public class KafkaStreamsConfigFactory {
 
+    /**
+     * Creates a Properties object configured for Kafka Streams operation.
+     * 
+     * <p>This method generates a complete Kafka Streams configuration including:
+     * <ul>
+     *   <li>Application ID from the provided configuration</li>
+     *   <li>Bootstrap servers from environment variables</li>
+     *   <li>SSL configuration for secure communication</li>
+     *   <li>String serializers for keys and values</li>
+     *   <li>Exactly-once processing guarantee</li>
+     * </ul>
+     * 
+     * <p>Required environment variables:
+     * <ul>
+     *   <li>{@code SSL_TRUSTSTORE_LOCATION} - path to SSL truststore (default: truststore.jks)</li>
+     *   <li>{@code SSL_TRUSTSTORE_PASSWORD} - SSL truststore password (default: changeit)</li>
+     * </ul>
+     * 
+     * <p>Optional environment variables:
+     * <ul>
+     *   <li>{@code BOOTSTRAP_SERVERS} - Kafka bootstrap servers (default: localhost:9093)</li>
+     * </ul>
+     * 
+     * @param appConfig the application configuration containing the application ID
+     * @return a Properties object ready for Kafka Streams initialization
+     * @throws NullPointerException if appConfig is null
+     * @see StreamsConfig
+     * @see SslConfigs
+     */
     public static Properties createProperties(ApplicationConfig appConfig) {
         Properties props = new Properties();
         
