@@ -6,35 +6,6 @@ A lightweight real-world kafka streams example.  To be completed/extended.
 
 Find the [java docs here](https://jeroenflvr.github.io/streaming-csv-processor/api/)
 
-- pipeline 1: read data from csv/parquet on s3, transform to json and sink to kafka topic
-- pipeline 2 (kafka streams): read kafka data, enrich, sink to KStream (append) and KTable (upsert) topics
-- pipeline 3: sink to postgresql, deltalake, web ticker (SSE), ...  Not sure yet if we'll be doing spark, flink, dbt, ...
-
-This will cover a collection of technologies and programming languages.  I wanted something as a go-to reference with quick setup, that I could also use for Proof-Of-Concepts, demos, new tech integration tests, etc.
-
-Tech stack:
-
-- docker
-- kafka
-- kafka streams
-- minio / aws s3
-- redpanda
-- python (uv, ..)
-- java (mvn, graalvm, ..)
-- git
-
-
-
-## Introduction
-
-prereqs:
-
-Get java 17, python3, docker or docker desktop, rpk (redpanda cli), akhq, ...
-
-- [x] docker redpanda setup (SSL)
-- [x] docker minio (s3 store)
-- [x] [akhq UI](https://akhq.io/) (beats the vscode/IntelliJ plugins) ([download](https://github.com/tchiotludo/akhq/releases/download/0.26.0/akhq-0.26.0-all.jar))
-- [x] quick python producer
 
 ## Why Kafka Streams?
 
@@ -80,6 +51,35 @@ When building real-time applications, one of the key challenges is how to proces
 -   You need to enrich, aggregate, or join streaming data before serving it to downstream systems.
 -   You want applications that are easy to scale out while remaining lightweight and cloud-friendly.
 -   You have a team of Java developers who can directly implement and maintain stream processing logic.
+
+## Introduction
+
+- pipeline 1: read data from csv/parquet on s3, transform to json and sink to kafka topic
+- pipeline 2 (kafka streams): read kafka data, enrich, sink to KStream (append) and KTable (upsert) topics
+- pipeline 3: sink to postgresql, deltalake, web ticker (SSE), ...  Not sure yet if we'll be doing spark, flink, dbt, ...
+
+This will cover a collection of technologies and programming languages.  I wanted something as a go-to reference with quick setup, that I could also use for Proof-Of-Concepts, demos, new tech integration tests, etc.
+
+Tech stack:
+
+- docker
+- kafka
+- kafka streams
+- minio / aws s3
+- redpanda
+- python (uv, ..)
+- java (mvn, graalvm, ..)
+- git
+
+
+prereqs:
+
+Get java 17, python3, docker or docker desktop, rpk (redpanda cli), akhq, ...
+
+- [x] docker redpanda setup (SSL)
+- [x] docker minio (s3 store)
+- [x] [akhq UI](https://akhq.io/) (beats the vscode/IntelliJ plugins) ([download](https://github.com/tchiotludo/akhq/releases/download/0.26.0/akhq-0.26.0-all.jar))
+- [x] quick python producer
 
 ## Setup
 
