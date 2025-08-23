@@ -22,3 +22,4 @@ minio-data/
 data-duckdb/
 redpanda-data/
 .lock
+target/

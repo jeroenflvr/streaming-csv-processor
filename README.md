@@ -118,3 +118,16 @@ run
 ```bash
 java -jar target/csvprocessor-1.0.0-shaded.jar
 ```
+
+graalvm
+
+compile using the pom.xml native profile
+```bash
+mvn -e -DskipTests -Pnative package
+```
+
+run
+```bash
+java -agentlib:native-image-agent=config-output-dir=src/main/resources/META-INF/native-image \
+  -jar target/csvprocessor-1.0.0-shaded.jar
+```
