@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: local_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: dbuser
+      POSTGRES_PASSWORD: dbpass123
+      POSTGRES_DB: streams
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgresql-data:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d

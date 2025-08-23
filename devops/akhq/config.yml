@@ -4,5 +4,5 @@ akhq:
       properties:
         bootstrap.servers: "127.0.0.1:9093"
         security.protocol: SSL
-        ssl.truststore.location: /Users/jeroen/projects/ks-example/devops/redpanda/certs/truststore.jks
+        ssl.truststore.location: /Users/jeroen/projects/streaming-csv-processor/devops/redpanda/certs/truststore.jks
         ssl.truststore.password: changeit

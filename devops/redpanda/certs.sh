@@ -15,12 +15,12 @@ openssl req -x509 -new -newkey rsa:4096 -nodes \
 echo "[2/4] Creating broker key + CSR..."
 openssl req -new -newkey rsa:4096 -nodes \
   -keyout server.key -out server.csr -subj "/CN=${COMMON_NAME}" \
-  -addext "subjectAltName = DNS:redpanda, DNS:localhost, IP:127.0.0.1"
+  -addext "subjectAltName = DNS:redpanda, DNS:localhost, DNS:host.docker.internal, IP:127.0.0.1"
 
 echo "[3/4] Signing broker cert..."
 cat >san.cnf <<'EOF'
 [v3_req]
-subjectAltName = DNS:redpanda, DNS:localhost, IP:127.0.0.1
+subjectAltName = DNS:redpanda, DNS:localhost, DNS:host.docker.internal, IP:127.0.0.1
 EOF
 openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial \
   -out server.crt -days "$DAYS" -extfile san.cnf -extensions v3_req

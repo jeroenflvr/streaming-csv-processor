@@ -24,3 +24,4 @@ redpanda-data/
 .lock
 target/
 target/classes/META-INF/native-image/.lock
+postgresql-data/

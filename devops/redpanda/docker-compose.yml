@@ -22,7 +22,7 @@ services:
       - --check=false
       - --node-id=0
       - --kafka-addr=SSL://0.0.0.0:9093
-      - --advertise-kafka-addr=SSL://localhost:9093
+      - --advertise-kafka-addr="SSL://localhost:9093","host.docker.internal:9093"
       - --set
       - redpanda.kafka_api_tls={"name":"SSL","enabled":true,"cert_file":"/etc/redpanda/certs/server.crt","key_file":"/etc/redpanda/certs/server.key","truststore_file":"/etc/redpanda/certs/ca.crt"}
 

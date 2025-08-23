@@ -5,24 +5,24 @@ import sys, time
 conf = {
     "bootstrap.servers": "localhost:9093",
     "security.protocol": "SSL",
-    "ssl.ca.location": "/Users/jeroen/projects/ks-example/devops/redpanda/certs/ca.crt",
+    "ssl.ca.location": "/Users/jeroen/projects/streaming-csv-processor/devops/redpanda/certs/ca.crt",
     "client.id": "py-producer",
     "enable.idempotence": True,
 }
 
-def delivery_report(err, msg):
+def delivery_report(err: str | None, msg: str | None) -> None:
     if err is not None:
         print(f"delivery failed: {err}")
     else:
         print(f"record produced to {msg=}")
  
 
-def kafka_producer(topic: str, message: str, key: str):
+def kafka_producer(topic: str, message: str, key: str) -> None:
  
     cfg = {
         "bootstrap.servers": "localhost:9093",
         "security.protocol": "SSL",
-        "ssl.ca.location": "/Users/jeroen/projects/ks-example/devops/redpanda/certs/ca.crt",
+        "ssl.ca.location": "/Users/jeroen/projects/streaming-csv-processor/devops/redpanda/certs/ca.crt",
         "security.protocol": "SSL",
     }
     producer = Producer(cfg)
@@ -35,7 +35,7 @@ def kafka_producer(topic: str, message: str, key: str):
  
     producer.flush(10)
  
-def main():
+def main() -> None:
     print("Hello from csv-processor!")
     print("ok")
  

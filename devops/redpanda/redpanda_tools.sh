@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-REDPANDA_PATH="/Users/jeroen/projects/ks-example/devops/redpanda"
+REDPANDA_PATH="/Users/jeroen/projects/streaming-csv-processor/devops/redpanda"
 
 start_redpanda() {
     echo "starting redpanda ..."
@@ -21,10 +21,10 @@ stop_redpanda() {
  
 
 create_topics(){
-    rpk topic create local-stream-topic --brokers localhost:9093 -X tls.enabled=true --tls-truststore=/Users/jeroen/projects/ks-example/devops/redpanda/certs/ca.crt
-    rpk topic create local-input-topic --brokers localhost:9093 -X tls.enabled=true --tls-truststore=/Users/jeroen/projects/ks-example/devops/redpanda/certs/ca.crt
-    rpk topic create local-update-topic --brokers localhost:9093 -c cleanup.policy=compact -X tls.enabled=true --tls-truststore=/Users/jeroen/projects/ks-example/devops/redpanda/certs/ca.crt
-    rpk topic create local-state-topic --brokers localhost:9093 -c cleanup.policy=compact -X tls.enabled=true --tls-truststore=/Users/jeroen/projects/ks-example/devops/redpanda/certs/ca.crt
-    rpk topic create local-updates-only-topic --brokers localhost:9093 -X tls.enabled=true --tls-truststore=/Users/jeroen/projects/ks-example/devops/redpanda/certs/ca.crt
+    rpk topic create local-stream-topic --brokers localhost:9093 -X tls.enabled=true --tls-truststore=/Users/jeroen/projects/streaming-csv-processor/devops/redpanda/certs/ca.crt
+    rpk topic create local-input-topic --brokers localhost:9093 -X tls.enabled=true --tls-truststore=/Users/jeroen/projects/streaming-csv-processor/devops/redpanda/certs/ca.crt
+    rpk topic create local-update-topic --brokers localhost:9093 -c cleanup.policy=compact -X tls.enabled=true --tls-truststore=/Users/jeroen/projects/streaming-csv-processor/devops/redpanda/certs/ca.crt
+    rpk topic create local-state-topic --brokers localhost:9093 -c cleanup.policy=compact -X tls.enabled=true --tls-truststore=/Users/jeroen/projects/streaming-csv-processor/devops/redpanda/certs/ca.crt
+    rpk topic create local-updates-only-topic --brokers localhost:9093 -X tls.enabled=true --tls-truststore=/Users/jeroen/projects/streaming-csv-processor/devops/redpanda/certs/ca.crt
 }
  
