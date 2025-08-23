@@ -181,3 +181,11 @@ java -agentlib:native-image-agent=config-output-dir=src/main/resources/META-INF/
 ```
 
 tip: when killing the app or it fails, remove the src/main/resources/META-INF/native-image/.lock
+
+
+generate javadoc docs
+```bash
+mvn javadoc:javadoc
+```
+
+browse local from /docs or from the [github pages](https://jeroenflvr.github.io/streaming-csv-processor/api/)
