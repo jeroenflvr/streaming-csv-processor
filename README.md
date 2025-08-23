@@ -4,7 +4,7 @@ Triggered by a recent event, I realized that I had never documented any of this.
 
 A lightweight real-world kafka streams example.  To be completed/extended.
 
-Find the [java docs here](https://jeroenflvr.github.io/ks-example/api/)
+Find the [java docs here](https://jeroenflvr.github.io/streaming-csv-processor/api/)
 
 - pipeline 1: read data from csv/parquet on s3, transform to json and sink to kafka topic
 - pipeline 2 (kafka streams): read kafka data, enrich, sink to KStream (append) and KTable (upsert) topics
