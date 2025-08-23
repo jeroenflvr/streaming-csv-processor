@@ -21,3 +21,4 @@ pip-wheel-metadata/
 minio-data/
 data-duckdb/
 redpanda-data/
+.lock
