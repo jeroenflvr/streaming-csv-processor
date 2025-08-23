@@ -33,7 +33,7 @@ import java.util.List;
  * and returning empty results rather than propagating exceptions to
  * the Kafka Streams processing pipeline.
  * 
- * @author CSV Processor Team
+ * @author JeroenFL
  * @version 1.0.0
  * @since 1.0.0
  * @see S3FileReader

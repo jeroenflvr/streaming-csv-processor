@@ -11,7 +11,7 @@ package jeroenfl.csvprocessor.config;
  * through the {@link #fromEnvironment()} factory method, which provides
  * sensible defaults for local development while allowing production customization.
  * 
- * @author CSV Processor Team
+ * @author JeroenFL
  * @version 1.0.0
  * @since 1.0.0
  * @see EnvironmentUtils

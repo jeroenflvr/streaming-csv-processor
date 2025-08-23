@@ -16,7 +16,7 @@ import java.util.Map;
  * <p>The data map contains all CSV columns except those used for the
  * composite key, plus additional metadata fields added during processing.
  * 
- * @author CSV Processor Team
+ * @author JeroenFL
  * @version 1.0.0
  * @since 1.0.0
  * @see jeroenfl.csvprocessor.processing.CsvProcessor

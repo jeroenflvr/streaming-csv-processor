@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter;
  * a sortable, compact representation suitable for both human reading
  * and programmatic processing.
  * 
- * @author CSV Processor Team
+ * @author JeroenFL
  * @version 1.0.0
  * @since 1.0.0
  */

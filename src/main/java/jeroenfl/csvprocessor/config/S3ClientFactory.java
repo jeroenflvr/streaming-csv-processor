@@ -18,7 +18,7 @@ import java.net.URI;
  * <p>The factory supports various S3-compatible storage services by allowing
  * custom endpoint configuration while maintaining the standard S3 API interface.
  * 
- * @author CSV Processor Team
+ * @author JeroenFL
  * @version 1.0.0
  * @since 1.0.0
  * @see S3Client

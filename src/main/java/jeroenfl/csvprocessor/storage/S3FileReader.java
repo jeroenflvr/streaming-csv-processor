@@ -33,7 +33,7 @@ import java.nio.charset.StandardCharsets;
  * BufferedReader returned by {@link #createReader(S3Location)} to prevent
  * resource leaks.
  * 
- * @author CSV Processor Team
+ * @author JeroenFL
  * @version 1.0.0
  * @since 1.0.0
  * @see S3Location

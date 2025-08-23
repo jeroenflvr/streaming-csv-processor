@@ -30,7 +30,7 @@ import java.util.*;
  * <p>The processor expects CSV files with at least the following columns:
  * {@code o_orderkey} and {@code o_custkey} for composite key generation.
  * 
- * @author CSV Processor Team
+ * @author JeroenFL
  * @version 1.0.0
  * @since 1.0.0
  * @see ProcessedRecord

@@ -17,7 +17,7 @@ package jeroenfl.csvprocessor.model;
  * <p>The class automatically handles leading slashes in object keys to ensure
  * consistent key formatting regardless of input format.
  * 
- * @author CSV Processor Team
+ * @author JeroenFL
  * @version 1.0.0
  * @since 1.0.0
  * @see #parse(String)

@@ -74,7 +74,7 @@
  * java -jar csvprocessor-1.0.0-shaded.jar
  * </pre>
  * 
- * @author CSV Processor Team
+ * @author JeroenFL
  * @version 1.0.0
  * @since 1.0.0
  */

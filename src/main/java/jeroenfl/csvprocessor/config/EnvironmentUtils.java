@@ -11,7 +11,7 @@ package jeroenfl.csvprocessor.config;
  * <p>All methods in this class are static and the class is designed to be
  * used as a utility without instantiation.
  * 
- * @author CSV Processor Team
+ * @author JeroenFL
  * @version 1.0.0
  * @since 1.0.0
  */

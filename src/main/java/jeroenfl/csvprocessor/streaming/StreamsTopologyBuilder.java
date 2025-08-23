@@ -47,7 +47,7 @@ import java.util.Objects;
  * State Topic (state maintenance)
  * </pre>
  * 
- * @author CSV Processor Team
+ * @author JeroenFL
  * @version 1.0.0
  * @since 1.0.0
  * @see ApplicationConfig

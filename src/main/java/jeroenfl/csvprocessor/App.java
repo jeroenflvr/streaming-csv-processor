@@ -30,7 +30,7 @@ import java.util.Properties;
  * <p>The application is designed for exactly-once processing semantics and 
  * supports various CSV formats with semicolon delimiters.
  * 
- * @author CSV Processor Team
+ * @author JeroenFL
  * @version 1.0.0
  * @since 1.0.0
  */
