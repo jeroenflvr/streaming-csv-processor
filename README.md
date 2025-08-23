@@ -2,6 +2,8 @@
 
 A real-world kafka streams example.
 
+find the [java docs here](https://jeroenflvr.github.io/ks-example/api/)
+
 - pipeline 1: read data from csv/parquet on s3, transform to json and sink to kafka topic
 - pipeline 2 (kafka streams): read kafka data, enrich, sink to KStream (append) and KTable (upsert) topics
 - pipeline 3: sink to postgresql, deltalake, web ticker (SSE), ...  Not sure yet if we'll be doing spark, flink, dbt, ...
