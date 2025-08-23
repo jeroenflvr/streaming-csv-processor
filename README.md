@@ -1,4 +1,4 @@
-# Kafka Streams Example
+# Streaming CSV Processor: A Kafka Streams Example
 
 Triggered by a recent event, I realized that I had never documented any of this.
 
