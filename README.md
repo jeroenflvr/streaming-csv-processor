@@ -1,8 +1,10 @@
 # Kafka Streams Example
 
-A real-world kafka streams example.
+Triggered by a recent event, I realized that I had never documented any of this.
 
-find the [java docs here](https://jeroenflvr.github.io/ks-example/api/)
+A lightweight real-world kafka streams example.  To be completed/extended.
+
+Find the [java docs here](https://jeroenflvr.github.io/ks-example/api/)
 
 - pipeline 1: read data from csv/parquet on s3, transform to json and sink to kafka topic
 - pipeline 2 (kafka streams): read kafka data, enrich, sink to KStream (append) and KTable (upsert) topics
@@ -34,9 +36,53 @@ Get java 17, python3, docker or docker desktop, rpk (redpanda cli), akhq, ...
 - [x] [akhq UI](https://akhq.io/) (beats the vscode/IntelliJ plugins) ([download](https://github.com/tchiotludo/akhq/releases/download/0.26.0/akhq-0.26.0-all.jar))
 - [x] quick python producer
 
+## Why Kafka Streams?
 
+When building real-time applications, one of the key challenges is how to process, transform, and react to data as it flows through your system. Kafka Streams is designed specifically for this purpose, providing a simple yet powerful way to build stream processing logic directly into your applications.
+
+### Key Advantages
+
+- Lightweight and Library-Based
+
+    Kafka Streams is not a separate cluster or external service. It’s just a client library you embed into your existing JVM applications. This keeps operations simple—no additional infrastructure to manage.
+
+- Integration with Apache Kafka
+
+    Because it's part of the Kafka ecosystem, Kafka Streams uses Kafka topics directly as input and output. This makes it naturally fault-tolerant, scalable, and easy to integrate with existing Kafka-based pipelines.
+
+- Scalability and Elasticity
+
+    Applications can scale horizontally just by adding more instances. Kafka Streams automatically rebalances work across instances using Kafka’s group coordination.
+
+- Fault Tolerance
+
+    Kafka Streams leverages Kafka’s durable storage for state and reprocessing. If an instance fails, state and processing tasks are reassigned, ensuring resilient processing without data loss.
+
+- Exactly-Once Processing
+
+    It supports exactly-once semantics (EOS), which ensures that every record is processed once—even in the face of retries, failures, or restarts.
+
+- Stateful and Stateless Processing
+
+    It supports both stateless operations (map, filter, merge) and stateful ones (aggregations, joins, windowed computations), making it versatile for many use cases.
+
+- Production-Ready by Design
+
+    Built-in features like monitoring, fault tolerance, and state management mean you can go from prototype to production without a major rewrite.
+
+- Requires Java Developer Skills
+
+    Kafka Streams is a Java library. To effectively design, develop, and maintain Kafka Streams applications, you’ll need Java (or Kotlin/Scala) programming skills. Teams without JVM experience may face a steeper learning curve compared to using SQL-based or no-code streaming tools.
+
+### When to Use Kafka Streams
+
+-   You already have Kafka and want to build real-time processing apps without deploying extra cluster frameworks (like Flink or Spark).
+-   You need to enrich, aggregate, or join streaming data before serving it to downstream systems.
+-   You want applications that are easy to scale out while remaining lightweight and cloud-friendly.
+-   You have a team of Java developers who can directly implement and maintain stream processing logic.
 
 ## Setup
+
 
 
 ### akhq
