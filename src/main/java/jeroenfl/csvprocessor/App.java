@@ -38,6 +38,15 @@ public class App {
     private static final Logger log = LoggerFactory.getLogger(App.class);
 
     /**
+     * Default constructor.
+     * <p>This class serves as the main entry point and should not be instantiated directly.
+     * Use the {@link #main(String[])} method to run the application.
+     */
+    public App() {
+        // Default constructor for main class
+    }
+
+    /**
      * Main entry point for the CSV processor application.
      * 
      * <p>This method:

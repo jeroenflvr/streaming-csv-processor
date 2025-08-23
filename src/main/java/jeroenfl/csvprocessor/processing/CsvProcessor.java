@@ -40,6 +40,15 @@ public class CsvProcessor {
     private static final Logger log = LoggerFactory.getLogger(CsvProcessor.class);
     
     /**
+     * Default constructor.
+     * <p>Creates a new CSV processor instance ready for processing semicolon-delimited CSV files.
+     * The processor handles BOM detection, header validation, and composite key generation.
+     */
+    public CsvProcessor() {
+        // Default constructor for CSV processor
+    }
+    
+    /**
      * Column names used to generate composite keys for order records.
      */
     private static final String[] ORDER_KEY_HEADERS = {"o_orderkey", "o_custkey"};
@@ -75,7 +84,7 @@ public class CsvProcessor {
      * @throws IOException if an error occurs reading from the BufferedReader
      * @throws NullPointerException if reader or sourceFilename is null
      * 
-     * @example
+     * <p>Example usage:
      * <pre>
      * try (BufferedReader reader = Files.newBufferedReader(csvFile)) {
      *     List&lt;ProcessedRecord&gt; records = processor.processCSV(reader, "orders.csv");

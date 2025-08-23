@@ -102,6 +102,18 @@
           </execution>
         </executions>
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.7.0</version>
+        <configuration>
+          <!-- write into repo/docs/api instead of target/site -->
+          <reportOutputDirectory>${project.basedir}/docs</reportOutputDirectory>
+          <destDir>api</destDir>
+          <encoding>UTF-8</encoding>
+          <release>17</release>
+        </configuration>
+      </plugin>
     </plugins>
   </build>
   <profiles>

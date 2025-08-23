@@ -81,7 +81,7 @@ public class FileProcessingService {
      * @param pathValue the S3 file path to process (may be null or empty)
      * @return a list of KeyValue pairs ready for Kafka publishing, never null but may be empty
      * 
-     * @example
+     * <p>Example usage:
      * <pre>
      * List&lt;KeyValue&lt;String, String&gt;&gt; messages = 
      *     service.processFile("s3://my-bucket/orders.csv");

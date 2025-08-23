@@ -58,7 +58,7 @@ public class S3Location {
      * @throws IllegalArgumentException if the path format is invalid or missing required components
      * @throws NullPointerException if path is null
      * 
-     * @example
+     * <p>Example usage:
      * <pre>
      * S3Location loc1 = S3Location.parse("s3://my-bucket/data/file.csv");
      * S3Location loc2 = S3Location.parse("cos://my-bucket/data/file.csv");

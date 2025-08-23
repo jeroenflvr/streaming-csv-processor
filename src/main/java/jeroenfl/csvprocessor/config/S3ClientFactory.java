@@ -27,6 +27,15 @@ import java.net.URI;
 public class S3ClientFactory {
 
     /**
+     * Default constructor.
+     * <p>This is a factory class for creating S3 client instances.
+     * All methods are static and thread-safe.
+     */
+    public S3ClientFactory() {
+        // Factory class constructor
+    }
+
+    /**
      * Creates an S3Client instance from environment variables.
      * 
      * <p>This method creates a fully configured S3 client suitable for

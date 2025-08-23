@@ -25,6 +25,15 @@ import java.time.format.DateTimeFormatter;
 public class TimeUtils {
 
     /**
+     * Default constructor.
+     * <p>This is a utility class with static methods only and should not be instantiated.
+     * All methods are thread-safe and can be called concurrently.
+     */
+    public TimeUtils() {
+        // Utility class constructor
+    }
+
+    /**
      * The timestamp format pattern used throughout the application.
      */
     private static final String TIMESTAMP_PATTERN = "yyyyMMddHHmmss";
@@ -44,7 +53,7 @@ public class TimeUtils {
      * 
      * @return the current timestamp as a string in YYYYMMddHHMMSS format
      * 
-     * @example
+     * <p>Example usage:
      * <pre>
      * String timestamp = TimeUtils.getCurrentTimestamp();
      * // Result: "20250823180000" (for 2025-08-23 18:00:00 UTC)
@@ -75,7 +84,7 @@ public class TimeUtils {
      * @return the timestamp as a Long, or null if extraction fails or field is invalid
      * @throws NullPointerException if mapper or fieldName is null
      * 
-     * @example
+     * <p>Example usage:
      * <pre>
      * ObjectMapper mapper = new ObjectMapper();
      * String json = "{\"ExtractionTS\": \"1234567890\"}";

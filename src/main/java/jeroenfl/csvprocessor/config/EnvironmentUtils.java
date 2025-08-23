@@ -18,6 +18,15 @@ package jeroenfl.csvprocessor.config;
 public class EnvironmentUtils {
     
     /**
+     * Default constructor.
+     * <p>This is a utility class with static methods only and should not be instantiated.
+     * All methods are thread-safe and can be called concurrently.
+     */
+    public EnvironmentUtils() {
+        // Utility class constructor
+    }
+    
+    /**
      * Gets value from environment variable or system property, with fallback to default.
      * 
      * <p>This method first checks for an environment variable with the given key.

@@ -1,0 +1,7 @@
+jeroenfl.csvprocessor
+jeroenfl.csvprocessor.config
+jeroenfl.csvprocessor.model
+jeroenfl.csvprocessor.processing
+jeroenfl.csvprocessor.storage
+jeroenfl.csvprocessor.streaming
+jeroenfl.csvprocessor.util

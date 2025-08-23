@@ -70,7 +70,7 @@ public class S3FileReader {
      * @throws IOException if the S3 object cannot be found, accessed, or read
      * @throws NullPointerException if location is null
      * 
-     * @example
+     * <p>Example usage:
      * <pre>
      * S3Location location = S3Location.parse("s3://my-bucket/data.csv");
      * try (BufferedReader reader = s3FileReader.createReader(location)) {

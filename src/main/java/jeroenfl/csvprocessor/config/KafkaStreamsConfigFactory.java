@@ -31,6 +31,15 @@ import java.util.Properties;
 public class KafkaStreamsConfigFactory {
 
     /**
+     * Default constructor.
+     * <p>This is a factory class for creating Kafka Streams configurations.
+     * All methods are static and thread-safe.
+     */
+    public KafkaStreamsConfigFactory() {
+        // Factory class constructor
+    }
+
+    /**
      * Creates a Properties object configured for Kafka Streams operation.
      * 
      * <p>This method generates a complete Kafka Streams configuration including:
