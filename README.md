@@ -131,3 +131,5 @@ run
 java -agentlib:native-image-agent=config-output-dir=src/main/resources/META-INF/native-image \
   -jar target/csvprocessor-1.0.0-shaded.jar
 ```
+
+tip: when killing the app or it fails, remove the src/main/resources/META-INF/native-image/.lock
