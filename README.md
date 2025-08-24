@@ -4,6 +4,10 @@ Triggered by a recent event, I realized that I had never documented any of this.
 
 This project represents a lightweight real-world kafka streams example.  To be completed/extended.
 
+<div align="center">
+    <img src="static/img/flow_dark.svg" alt="Flow Diagram" />
+</div>
+
 Implemented:
 
 - [x] read instructions from a kafka topic: each message contains an s3 object link to csv data
