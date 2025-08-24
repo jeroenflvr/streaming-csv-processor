@@ -1,6 +1,5 @@
 # Project Overview
 
-Below is an ASCII art flowchart illustrating the main phases of the streaming CSV processor pipeline:
 
 ```
                   +-------------------------------+
@@ -38,9 +37,3 @@ Below is an ASCII art flowchart illustrating the main phases of the streaming CS
 +-------------------+   +-------------------+
 
 ```
-
-**Legend:**
-- [x] = Implemented
-- [ ] = Planned / To Do
-
-This flow represents the journey from receiving instructions via Kafka, processing CSV data from S3, transforming and enriching records, streaming results, and future plans for database, delta table, and API integration.
