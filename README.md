@@ -6,7 +6,7 @@ This project represents a lightweight real-world kafka streams example.  To be c
 
 
 <div align="center">
-    <img src="static/img/flow_dark.svg" alt="Data journey" />
+    <img src="static/img/flow_dlq_api_dark.svg" alt="Data journey" />
 </div>
 
 Implemented:
@@ -19,9 +19,13 @@ Implemented:
     - add 2 fields (timestamp, filename)
 - [x] write to KStream (append)
 - [x] write to KTable (upsert) (including stateTopic)
+- [ ] on failure, write topic to DeadLetter Topic 
 - [ ] sink to db
 - [ ] sink to delta table on s3
 - [ ] call api
+- [ ] API to manage failed messages: list, resubmit
+- [ ] API to replay messages
+
 - [ ] ...
 
 

@@ -10,6 +10,9 @@ import jeroenflvr.csvprocessor.storage.S3FileReader;
 import org.apache.kafka.streams.KeyValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import jeroenflvr.csvprocessor.processing.ProcessingErrorHandler;
 
 import java.io.BufferedReader;
 import java.util.ArrayList;
@@ -42,12 +45,18 @@ import java.util.List;
  * @see CsvProcessor
  * @see ProcessedRecord
  */
+import org.springframework.stereotype.Component;
+
+@Component
 public class FileProcessingService {
     private static final Logger log = LoggerFactory.getLogger(FileProcessingService.class);
     
     private final S3FileReader s3FileReader;
     private final CsvProcessor csvProcessor;
     private final ObjectMapper objectMapper;
+
+    @Autowired
+    private ProcessingErrorHandler errorHandler;
 
     /**
      * Constructs a new FileProcessingService with the specified S3 file reader.
@@ -94,27 +103,25 @@ public class FileProcessingService {
      */
     public List<KeyValue<String, String>> processFile(String pathValue) {
         List<KeyValue<String, String>> result = new ArrayList<>();
-        
         if (pathValue == null || pathValue.isBlank()) {
             return result;
         }
-
         try {
             S3Location location = S3Location.parse(pathValue.trim());
-            
             try (BufferedReader reader = s3FileReader.createReader(location)) {
                 List<ProcessedRecord> records = csvProcessor.processCSV(reader, pathValue.trim());
-                
                 for (ProcessedRecord record : records) {
                     String json = objectMapper.writeValueAsString(record.getData());
                     result.add(KeyValue.pair(record.getCompositeKey(), json));
                 }
-                
             }
         } catch (Exception e) {
-            log.error("Failed to process file {}: {}", pathValue, e.getMessage(), e);
+            if (errorHandler != null) {
+                errorHandler.handleProcessingError(pathValue, e);
+            } else {
+                log.error("Failed to process file {}: {}", pathValue, e.getMessage(), e);
+            }
         }
-
         return result;
     }
 }

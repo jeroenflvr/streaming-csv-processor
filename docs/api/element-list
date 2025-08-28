@@ -1,5 +1,7 @@
 jeroenflvr.csvprocessor
+jeroenflvr.csvprocessor.api
 jeroenflvr.csvprocessor.config
+jeroenflvr.csvprocessor.kafka
 jeroenflvr.csvprocessor.model
 jeroenflvr.csvprocessor.processing
 jeroenflvr.csvprocessor.storage

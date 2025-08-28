@@ -2,6 +2,7 @@ package jeroenflvr.csvprocessor.storage;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import jeroenflvr.csvprocessor.model.S3Location;
 import software.amazon.awssdk.core.ResponseInputStream;
@@ -40,6 +41,7 @@ import java.nio.charset.StandardCharsets;
  * @see S3Location
  * @see S3Client
  */
+@Component
 public class S3FileReader {
     private static final Logger log = LoggerFactory.getLogger(S3FileReader.class);
     
